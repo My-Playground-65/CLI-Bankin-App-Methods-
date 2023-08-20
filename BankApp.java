@@ -314,5 +314,27 @@ public class BankApp{
 
     }
 
+    //Create new Account
+
+    public static void createNewAccount(){
+
+        //User Id generation
+
+        id = String.format("SDB-%05d", bankUsers.length + 1);
+        System.out.printf("\tSDB-%05d \n", bankUsers.length + 1);
+
+        name = getUserName();
+        balance = getInitialDeposit();
+
+        bankUsers = arryExtend(bankUsers, id, name, balance);
+        
+        System.out.println();
+        System.out.printf(SUCCESS_MSG, String.format("%s:%s added successfully \n", id, name));
+        System.out.print("\tDo you want to continue ? (Y/n)");
+        if (!SCANNER.nextLine().toUpperCase().strip().equals("Y"))
+        screen = DASHBOARD;
+        
+    }
+
 
 }
