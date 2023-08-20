@@ -149,7 +149,7 @@ public class BankApp{
 
      //ID Validation
 
-     public static String getUserId(){
+    public static String getUserId(){
 
         boolean valid;
         String value;
@@ -331,7 +331,7 @@ public class BankApp{
         //User Id generation
 
         id = String.format("SDB-%05d", bankUsers.length + 1);
-        System.out.printf("\tSDB-%05d \n", bankUsers.length + 1);
+        System.out.printf("\t%sSDB-%05d \n", "ID : ", bankUsers.length + 1);
 
         name = getUserName();
         balance = getInitialDeposit();
@@ -351,7 +351,7 @@ public class BankApp{
     public static void getDeposit(){
 
         id = getUserId();
-        System.out.println("\tCurrent Balance : " + bankUsers[index][2]);
+        System.out.printf("\tCurrent Balance : Rs.%.2f \n",Double.parseDouble(bankUsers[index][2]));
 
         //Check Deposit amount
         boolean valid;
@@ -440,10 +440,12 @@ public class BankApp{
         String fromId = getFromUserId();
         int fromUserIndex = index;
         System.out.println("\tFrom Account Holder : " + bankUsers[index][1]);
+        System.out.println();
 
         String toId = getToUserId();
         int toUserIndex = index;
         System.out.println("\tTo Account Holder : " + bankUsers[index][1]);
+        System.out.println();
 
         System.out.printf("\tFrom account Balance : Rs.%.2f \n", Double.parseDouble(bankUsers[fromUserIndex][2]));
         System.out.printf("\tTo account Balance : Rs.%.2f \n", Double.parseDouble(bankUsers[toUserIndex][2]));;
@@ -486,6 +488,7 @@ public class BankApp{
         //bankUsers[toUserIndex][2] += transAmount + "";
         //Update From User's balance after transfer
         bankUsers[fromUserIndex][2]= fromUserBal - transAmount * 0.1 + "";
+        System.out.println();
 
         System.out.printf("\tFrom account Balance : Rs.%.2f \n", Double.parseDouble(bankUsers[fromUserIndex][2]));
         System.out.printf("\tTo account Balance : Rs.%.2f \n", Double.parseDouble(bankUsers[toUserIndex][2]));
@@ -571,8 +574,8 @@ public class BankApp{
             System.out.println(LINE);
             // Body
             for (int i = 0; i < bankUsers.length; i++) {
-                System.out.printf("\t|%-12s|%-13s|%-15s|\n", bankUsers[i][0],
-                bankUsers[i][1] , bankUsers[i][2]);  
+                System.out.printf("\t|%-12s|%-13s|Rs.%-12.2f|\n", bankUsers[i][0],
+                bankUsers[i][1] , Double.parseDouble(bankUsers[i][2]));  
             }
             System.out.println(LINE);
         }
