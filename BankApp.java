@@ -51,8 +51,11 @@ public class BankApp{
                 case WITHDRAW_MONEY:
                     getWithdraw();
                     break;
-                case TRANSFER_MONEYY:
+                case TRANSFER_MONEY:
                     getTransfer();
+                    break;
+                case BALANCE_CHECK:
+                    getAccountBal();;
                     break;
                 
 
@@ -496,6 +499,23 @@ public class BankApp{
         if (!SCANNER.nextLine().toUpperCase().strip().equals("Y"))
         screen = DASHBOARD;
     }
+
+    //Check Account Balance
+
+    public static void getAccountBal(){
+
+        id = getToUserId();
+        balance = Double.parseDouble(bankUsers[index][2]);
+        System.out.printf("\tCurrent Account Balance : Rs.%.2f \n", balance);
+        System.out.printf("\tWithdraw Available Balance : Rs.%.2f \n", balance - 500);
+
+        System.out.println();
+        System.out.print("\tDo you want to continue ? (Y/n)");
+        if (!SCANNER.nextLine().toUpperCase().strip().equals("Y"))
+        screen = DASHBOARD;
+
+    }
+
 
 
 
