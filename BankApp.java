@@ -106,4 +106,35 @@ public class BankApp{
         }
     }
 
+    
+    //Name Validation
+
+    public static String getUserName(){
+
+        boolean valid;
+        String value;
+
+        do{
+
+            valid = true;
+            System.out.print("\tEnter User name : ");
+            value = SCANNER.nextLine().strip();
+
+            if(value.isBlank()){
+                System.out.printf(ERROR_MSG, "User name can't be empty");
+                valid = false;
+                continue;
+            }
+            for (int i = 0; i < value.length(); i++) {
+                if(!(Character.isLetter(value.charAt(i))|| Character.isSpaceChar(value.charAt(i)))){
+                    System.out.printf(ERROR_MSG, "Invalid name");
+                    valid = false;
+                    break;
+                }
+            }
+        }while(!valid);
+        return value;
+
+    }
+
 }
