@@ -45,6 +45,9 @@ public class BankApp{
                 case DASHBOARD:
                     getDashboard();
                     break;
+                case CREATE_NEW_ACCOUNT:
+                    createNewAccount();
+                    break;
                 case DEPOSIT_MONEY:
                     getDeposit();
                     break;
@@ -63,18 +66,7 @@ public class BankApp{
                 case PRINT_DETAILS:
                     printDetails();;
                     break;
-
-
-
-
-
             }
-
-
-
-
-
-
 
         }while(true);
 
@@ -589,10 +581,5 @@ public class BankApp{
         if (SCANNER.nextLine().strip().toUpperCase().equals("Y")) screen = DASHBOARD;
          
     }
-
-
-
-
-
 
 }
