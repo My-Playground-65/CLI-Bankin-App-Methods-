@@ -28,4 +28,82 @@ public class BankApp{
     static double balance;
     static int index;
 
+    public static void main(String[] args) {
+        
+        screen = DASHBOARD;
+
+        do{
+
+            final String APP_TITLE = String.format("%s%s%s",
+            COLOR_BLUE_BOLD, screen, RESET);
+
+            System.out.println(CLEAR);
+            System.out.println("\t" + APP_TITLE + "\n");
+
+            switch(screen){
+
+                case DASHBOARD:
+                    getDashboard();
+                    break;
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+        }while(true);
+
+    }
+
+    //Get DASHBOARD
+
+    public static void getDashboard(){
+        System.out.println("\t[1]. Create New Account");
+        System.out.println("\t[2]. Deposit");
+        System.out.println("\t[3]. Withdrawal");
+        System.out.println("\t[4]. Transfer");
+        System.out.println("\t[5]. Check the Balance");
+        System.out.println("\t[6]. Delete Statement");
+        System.out.println("\t[7]. Print Details");
+        System.out.println("\t[8]. Exit");
+        System.out.print("\n\t Enter an option to continue: ");
+
+        int option = SCANNER.nextInt();
+        SCANNER.nextLine();
+
+        switch(option){
+            case 1:
+                screen = CREATE_NEW_ACCOUNT;
+                break;
+            case 2:
+                screen = DEPOSIT_MONEY;
+                break;
+            case 3:
+                screen = WITHDRAW_MONEY;
+                break;
+            case 4:
+                screen = TRANSFER_MONEY;
+                break;
+            case 5:
+                screen = BALANCE_CHECK;
+                break;
+            case 6:
+                screen = DELETE_ACCOUNT;
+                break;
+            case 7:
+                screen = PRINT_DETAILS;
+                break;
+            case 8:
+                System.out.println(CLEAR);
+                System.exit(0);
+        }
+    }
+
 }
