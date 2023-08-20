@@ -267,5 +267,35 @@ public class BankApp{
         return value;
     }
 
+     //Initial Deposit Validation
+
+     public static double getInitialDeposit(){
+
+        boolean valid;
+        String amountStr;
+        double amount = 0;
+
+        do{
+
+            valid = true;
+            System.out.print("\tEnter Initial Deposit : ");
+            amountStr = SCANNER.nextLine();
+
+            if(amountStr.isBlank()){
+                System.out.printf(ERROR_MSG, "Deposit can't be empty");
+                valid = false;
+                continue;
+            }
+            amount = Double.parseDouble(amountStr);
+            if(amount < 5000){
+                System.out.printf(ERROR_MSG, "Insufficient Initial Deposit");
+                valid = false;
+                continue;
+            }
+
+        }while(!valid);
+        return amount;
+    }
+
 
 }
