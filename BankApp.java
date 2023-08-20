@@ -297,5 +297,22 @@ public class BankApp{
         return amount;
     }
 
+    //Extend Array
+
+    public static String[][] arryExtend(String[][] input, String id, String name, double amount){
+
+        String[][] newUserArray = new String[input.length + 1][3];
+
+        for (int i = 0; i < input.length; i++) {
+            newUserArray[i] = input[i];
+        }
+        newUserArray[newUserArray.length -1][0] = id;
+        newUserArray[newUserArray.length-1][1]=name ;
+        newUserArray[newUserArray.length-1][2]=amount + " ";
+        input = newUserArray;
+        return input;
+
+    }
+
 
 }
