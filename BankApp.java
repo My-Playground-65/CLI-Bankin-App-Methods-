@@ -45,6 +45,9 @@ public class BankApp{
                 case DASHBOARD:
                     getDashboard();
                     break;
+                case DEPOSIT_MONEY:
+                    getDeposit();;
+                    break;
 
 
 
@@ -334,6 +337,47 @@ public class BankApp{
         if (!SCANNER.nextLine().toUpperCase().strip().equals("Y"))
         screen = DASHBOARD;
         
+    }
+
+    //Deposit
+
+    public static void getDeposit(){
+
+        id = getUserId();
+        System.out.println("\tCurrent Balance : " + bankUsers[index][2]);
+
+        //Check Deposit amount
+        boolean valid;
+        double depoAmount = 0;
+        String depoStr;
+        do{
+            valid = true;
+            System.out.print("\tEnter Deposit amount : ");
+            depoStr = SCANNER.nextLine().strip();
+
+            if(depoStr.isBlank()){
+                System.out.printf(ERROR_MSG, "Deposit Amount can't be empty");
+                valid = false;
+                continue;
+            }
+            depoAmount = Double.parseDouble(depoStr);
+            if(depoAmount < 500){
+                System.out.printf(ERROR_MSG, "Insufficient Deposit Amount");
+                valid = false;
+                continue;
+            }
+        }while(!valid);
+
+        balance = Double.parseDouble(bankUsers[index][2]) + depoAmount;
+        bankUsers[index][2] = balance + " ";
+
+        System.out.printf("\tNew Balance : Rs.%.2f \n",Double.parseDouble(bankUsers[index][2]));
+
+        System.out.println();
+        System.out.printf(SUCCESS_MSG, String.format("Rs.%.2f amount deposited successfully \n", depoAmount));
+        System.out.print("\tDo you want to continue ? (Y/n)");
+        if (!SCANNER.nextLine().toUpperCase().strip().equals("Y"))
+        screen = DASHBOARD;
     }
 
 
