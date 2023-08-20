@@ -55,7 +55,10 @@ public class BankApp{
                     getTransfer();
                     break;
                 case BALANCE_CHECK:
-                    getAccountBal();;
+                    getAccountBal();
+                    break;
+                case DELETE_ACCOUNT:
+                    deleteAccount();
                     break;
                 
 
@@ -515,6 +518,51 @@ public class BankApp{
         screen = DASHBOARD;
 
     }
+
+      //Shrink Array
+
+      public static String[][] arryShrink(String[][] input, int index){
+
+        String[][] newUserArray = new String[input.length -1][3];
+        for (int i = 0; i < input.length; i++) {
+            
+            if(i < index){
+                newUserArray[i] = input[i];
+            }else if(i == index){
+                continue;
+            }else{
+                newUserArray[i - 1 ] = input[i];
+            }
+        }
+        input = newUserArray;
+        return input;
+    }
+
+
+    //Delete Account
+
+    public static void deleteAccount(){
+
+        id = getUserId();
+
+        System.out.println("\tName : " + bankUsers[index][1]);
+        System.out.println("\tBalance : " + bankUsers[index][2]);
+
+        System.out.println();
+        System.out.print("\tAre you sure to delete ? (Y/n)");
+        if (!SCANNER.nextLine().toUpperCase().strip().equals("Y"))
+        screen = DASHBOARD;
+
+        bankUsers = arryShrink(bankUsers, index);
+
+        System.out.println();
+        System.out.printf(SUCCESS_MSG, String.format("%s: account deletd successfully \n", id));
+        System.out.print("\tDo you want to continue ? (Y/n)");
+        if (!SCANNER.nextLine().toUpperCase().strip().equals("Y"))
+        screen = DASHBOARD;
+
+    }
+
 
 
 
