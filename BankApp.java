@@ -224,4 +224,48 @@ public class BankApp{
         return value;
     }
 
+     //To user ID validation
+
+     public static String getToUserId(){
+
+        boolean valid;
+        String value;
+
+        do{
+
+            valid = true;
+            System.out.print("\tEnter To Account Number : ");
+            value=SCANNER.nextLine().strip();
+
+            if(value.isBlank()){
+                System.out.printf(ERROR_MSG,"ID can't be empty");
+                valid=false;
+                continue;
+            }
+            if(!(value.startsWith("SDB-") && value.length() == 9)){
+                System.out.printf(ERROR_MSG, "Invalid ID format");
+                valid = false;
+                continue; 
+            }
+            
+            
+            boolean isExistedID = false;
+            for (int i = 0; i < bankUsers.length; i++) {
+                if(bankUsers[i][0].equals(value)){
+                    index = i;
+                    isExistedID = true;
+                    break;
+                }
+            }
+            if(!isExistedID){
+                System.out.printf(ERROR_MSG, "User ID does not exist");
+                valid = false;
+                continue;
+            }
+
+        }while(!valid);
+        return value;
+    }
+
+
 }
