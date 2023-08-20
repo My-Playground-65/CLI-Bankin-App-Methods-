@@ -51,6 +51,9 @@ public class BankApp{
                 case WITHDRAW_MONEY:
                     getWithdraw();
                     break;
+                case TRANSFER_MONEYY:
+                    getTransfer();
+                    break;
                 
 
 
@@ -427,10 +430,73 @@ public class BankApp{
         System.out.printf(SUCCESS_MSG, String.format("Rs.%.2f amount withdraw successfully \n", withAmount));
         System.out.print("\tDo you want to continue ? (Y/n)");
         if (!SCANNER.nextLine().toUpperCase().strip().equals("Y"))
-        screen = DASHBOARD;
-
-        
+        screen = DASHBOARD;    
     }
+
+      //Transfer
+
+      public static void getTransfer(){
+
+        String fromId = getFromUserId();
+        int fromUserIndex = index;
+        System.out.println("\tFrom Account Holder : " + bankUsers[index][1]);
+
+        String toId = getToUserId();
+        int toUserIndex = index;
+        System.out.println("\tTo Account Holder : " + bankUsers[index][1]);
+
+        System.out.printf("\tFrom account Balance : Rs.%.2f \n", Double.parseDouble(bankUsers[fromUserIndex][2]));
+        System.out.printf("\tTo account Balance : Rs.%.2f \n", Double.parseDouble(bankUsers[toUserIndex][2]));;
+
+        boolean valid;
+        double transAmount = 0;
+        String transStr;
+        double fromUserBal = 0;
+        double toUserBal = 0;
+
+        do{
+
+            valid = true;
+            System.out.print("\tEnter Transfer amount : ");
+            transStr = SCANNER.nextLine().strip();
+
+            if(transStr.isBlank()){
+                System.out.printf(ERROR_MSG, "Transfer Amount can't be empty");
+                valid = false;
+                continue;
+            }
+            transAmount = Double.parseDouble(transStr);
+            if(transAmount < 100){
+                System.out.printf(ERROR_MSG, "Insufficient Transfer Amount");
+                valid = false;
+                continue;
+            }
+
+            fromUserBal =  Double.parseDouble(bankUsers[fromUserIndex][2]) - transAmount;
+            if(fromUserBal< 500){
+                System.out.printf(ERROR_MSG, "Insufficient Account Balance");
+                valid = false;
+                continue;
+            }
+        }while(!valid);
+
+        toUserBal = Double.parseDouble(bankUsers[toUserIndex][2]) + transAmount;
+        bankUsers[toUserIndex][2] = toUserBal + "";
+
+        //bankUsers[toUserIndex][2] += transAmount + "";
+        //Update From User's balance after transfer
+        bankUsers[fromUserIndex][2]= fromUserBal - transAmount * 0.1 + "";
+
+        System.out.printf("\tFrom account Balance : Rs.%.2f \n", Double.parseDouble(bankUsers[fromUserIndex][2]));
+        System.out.printf("\tTo account Balance : Rs.%.2f \n", Double.parseDouble(bankUsers[toUserIndex][2]));
+
+        System.out.println();
+        System.out.printf(SUCCESS_MSG, String.format("Rs.%.2f amount transfer successfully \n", transAmount));
+        System.out.print("\tDo you want to continue ? (Y/n)");
+        if (!SCANNER.nextLine().toUpperCase().strip().equals("Y"))
+        screen = DASHBOARD;
+    }
+
 
 
 
