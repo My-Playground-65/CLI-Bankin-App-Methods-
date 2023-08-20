@@ -60,7 +60,9 @@ public class BankApp{
                 case DELETE_ACCOUNT:
                     deleteAccount();
                     break;
-                
+                case PRINT_DETAILS:
+                    printDetails();;
+                    break;
 
 
 
@@ -561,6 +563,31 @@ public class BankApp{
         if (!SCANNER.nextLine().toUpperCase().strip().equals("Y"))
         screen = DASHBOARD;
 
+    }
+
+     //Print Details
+
+     public static void printDetails(){
+
+        if (bankUsers.length == 0){
+            System.out.printf(ERROR_MSG, "No customer records found, please add a new customer!");                      
+        }else {
+            final String LINE = "\t+".concat("-".repeat(12)).concat("+").concat("-".repeat(13)).concat("+")
+            .concat("-".repeat(15)).concat("+");
+            System.out.println(LINE);
+            System.out.printf("\t|%-12s|%-13s|%-15s| \n", "ID", "NAME", "BALANCE");
+            System.out.println(LINE);
+            // Body
+            for (int i = 0; i < bankUsers.length; i++) {
+                System.out.printf("\t|%-12s|%-13s|%-15s|\n", bankUsers[i][0],
+                bankUsers[i][1] , bankUsers[i][2]);  
+            }
+            System.out.println(LINE);
+        }
+
+        System.out.print("\tDo you want to go back? (Y/n) ");
+        if (SCANNER.nextLine().strip().toUpperCase().equals("Y")) screen = DASHBOARD;
+         
     }
 
 
