@@ -46,8 +46,12 @@ public class BankApp{
                     getDashboard();
                     break;
                 case DEPOSIT_MONEY:
-                    getDeposit();;
+                    getDeposit();
                     break;
+                case WITHDRAW_MONEY:
+                    getWithdraw();
+                    break;
+                
 
 
 
@@ -379,6 +383,55 @@ public class BankApp{
         if (!SCANNER.nextLine().toUpperCase().strip().equals("Y"))
         screen = DASHBOARD;
     }
+
+    //Withdraw
+
+    public static void getWithdraw(){
+
+        id = getUserId();
+
+        boolean valid;
+        double withAmount = 0;
+        String withStr;
+
+        do{
+
+            valid = true;
+            System.out.print("\tEnter Withdraw amount : ");
+            withStr = SCANNER.nextLine().strip();
+
+            if(withStr.isBlank()){
+                System.out.printf(ERROR_MSG, "Withdraw Amount can't be empty");
+                valid = false;
+                continue;
+            }
+            withAmount = Double.parseDouble(withStr);
+            if(withAmount < 100){
+                System.out.printf(ERROR_MSG, "Insufficient Withdraw Amount");
+                valid = false;
+                continue;
+            }
+
+            balance =  Double.parseDouble(bankUsers[index][2]) - withAmount;
+            if(balance < 500){
+                System.out.printf(ERROR_MSG, "Insufficient Account Balance");
+                valid = false;
+                continue;
+            }
+        }while(!valid);
+        bankUsers[index][2] = balance +"";
+
+        System.out.printf("\tNew Balance : Rs.%.2f \n",Double.parseDouble(bankUsers[index][2]));
+
+        System.out.println();
+        System.out.printf(SUCCESS_MSG, String.format("Rs.%.2f amount withdraw successfully \n", withAmount));
+        System.out.print("\tDo you want to continue ? (Y/n)");
+        if (!SCANNER.nextLine().toUpperCase().strip().equals("Y"))
+        screen = DASHBOARD;
+
+        
+    }
+
 
 
 }
